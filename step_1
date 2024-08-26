@@ -1,0 +1,63 @@
+# Load necessary libraries
+library(devtools)
+library(shiny)
+
+# Create a new package
+create("MyShinyPackage")
+
+# Navigate to the package directory
+setwd("MyShinyPackage")
+
+# Create a 'R' directory for R scripts
+dir.create("R")
+
+# Create a sample Shiny app script
+cat("
+#' A simple Shiny app
+#'
+#' @export
+run_my_shiny_app <- function() {
+  ui <- fluidPage(
+    titlePanel('My Shiny App'),
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput('num', 'Choose a number:', 1, 100, 50)
+      ),
+      mainPanel(
+        textOutput('result')
+      )
+    )
+  )
+  
+  server <- function(input, output) {
+    output$result <- renderText({
+      paste('You selected:', input$num)
+    })
+  }
+  
+  shinyApp(ui = ui, server = server)
+}
+" , file = "R/app.R")
+
+# Create a DESCRIPTION file
+cat("
+Package: MyShinyPackage
+Type: Package
+Title: My Shiny Package
+Version: 0.1.0
+Author: Your Name
+Maintainer: Your Name <your.email@example.com>
+Description: A package that integrates Shiny apps.
+License: MIT
+Imports:
+  shiny
+" , file = "DESCRIPTION")
+
+# Create NAMESPACE file
+cat("
+export(run_my_shiny_app)
+" , file = "NAMESPACE")
+
+# Install the package
+devtools::document()
+devtools::install()
