@@ -1,2 +1,2 @@
-# Beginer_creating-Shini-Apps
+# Beginer_creating-Shiny-Apps
 Creating an R package that integrates Shiny apps
