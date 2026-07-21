@@ -1,0 +1,11 @@
+# Jangan upload folder dataset foto/video trial yang berat
+Trial/
+  Camtrap_base/
+  
+  # File temporer R & Shiny
+  .Rproj.user/
+  .Rhistory
+.RData
+.Ruserdata
+*.RData
+.Rproj.user
